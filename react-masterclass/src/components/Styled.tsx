@@ -1,5 +1,9 @@
 import styled, { keyframes } from "styled-components";
 
+interface colorProps {
+  bgColor: string;
+}
+
 const Styled = () => {
   return (
     <Father as="header">
@@ -22,9 +26,9 @@ const Styled = () => {
 };
 
 const Father = styled.div`
-  //   display: flex;
+  // display: flex;
 `;
-const Box = styled.div`
+const Box = styled.div<colorProps>`
   width: 100px;
   height: 100px;
   background-color: ${(props) => props.bgColor};
