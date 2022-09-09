@@ -25,6 +25,13 @@ function Chart() {
   const { isLoading, data } = useQuery<IHistorical[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
+  const exceptData = data ?? [];
+  const chartData = exceptData?.map((i) => {
+    return {
+      x: i.time_close,
+      y: [i.open, i.high, i.low, i.close],
+    };
+  });
 
   return (
     <div>
@@ -32,14 +39,10 @@ function Chart() {
         "Loading Chart..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "Price",
-              data:
-                data?.map((price: { close: string }) =>
-                  parseFloat(price.close)
-                ) ?? [],
+              data: chartData,
             },
           ]}
           options={{
@@ -52,28 +55,13 @@ function Chart() {
             },
             stroke: {
               curve: "smooth",
-              width: 4,
+              width: 1,
             },
-            grid: { show: false },
-            yaxis: { show: false },
             xaxis: {
-              labels: { show: false },
-              axisTicks: { show: false },
-              axisBorder: { show: false },
               type: "datetime",
               categories: data?.map((price) =>
                 new Date(price.time_close * 1000).toISOString()
               ),
-            },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["lightgreen"], stops: [0, 100] },
-            },
-            colors: ["orange"],
-            tooltip: {
-              y: {
-                formatter: (value) => `$${value.toFixed(3)}`,
-              },
             },
           }}
         />
