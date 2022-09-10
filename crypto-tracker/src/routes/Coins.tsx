@@ -43,7 +43,10 @@ function Coins() {
         <CoinList>
           {data?.slice(0, 10).map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`} state={{ name: coin.name }}>
+              <Link
+                to={`/Nomad_reactJS/${coin.id}`}
+                state={{ name: coin.name }}
+              >
                 <Img
                   src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
                 />
@@ -59,6 +62,8 @@ function Coins() {
 
 const Container = styled.div`
   padding: 20px 10px;
+  max-width: 480px;
+  margin: 0 auto;
 `;
 const Header = styled.header`
   height: 10vh;

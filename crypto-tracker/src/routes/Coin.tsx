@@ -128,7 +128,7 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
-        <Link to={`/`}>
+        <Link to={`/Nomad_reactJS`}>
           <span> &larr; </span>
         </Link>
         <Title>
@@ -166,10 +166,10 @@ function Coin() {
           </Overview>
           <Tabs>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={`/Nomad_reactJS/${coinId}/price`}>Price</Link>
             </Tab>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
+              <Link to={`/Nomad_reactJS/${coinId}/chart`}>Chart</Link>
             </Tab>
           </Tabs>
 
@@ -182,6 +182,8 @@ function Coin() {
 
 const Container = styled.div`
   padding: 20px 10px;
+  max-width: 480px;
+  margin: 0 auto;
 `;
 const Header = styled.header`
   height: 10vh;
