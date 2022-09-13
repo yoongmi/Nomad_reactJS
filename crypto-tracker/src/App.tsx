@@ -1,6 +1,24 @@
 import { createGlobalStyle } from "styled-components";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, LightTeme } from "./theme";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
+
+function App() {
+  const isDark = useRecoilValue(isDarkAtom);
+  return (
+    <>
+      <ThemeProvider theme={isDark ? darkTheme : LightTeme}>
+        <GlobalStyle />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
+    </>
+  );
+}
 
 const GlobalStyle = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -61,15 +79,5 @@ a {
   color:inherit;
 }
 `;
-
-function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
-    </>
-  );
-}
 
 export default App;

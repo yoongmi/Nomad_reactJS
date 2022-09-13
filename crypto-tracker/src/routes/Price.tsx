@@ -35,12 +35,8 @@ function Price() {
           {data?.map((price) => (
             <PriceList>
               <dl>
-                <dt>time Close : </dt>
-                <dd>{new Date(price.time_close * 1000).toISOString()}</dd>
-              </dl>
-              <dl>
-                <dt>time Open : </dt>
-                <dd>{new Date(price.time_open * 1000).toISOString()}</dd>
+                <dt>Date : </dt>
+                <dd>{new Date(price.time_close * 1000).toDateString()}</dd>
               </dl>
               <dl>
                 <dt>open : </dt>
@@ -70,11 +66,14 @@ const PriceList = styled.div`
   margin-bottom: 20px;
   dl {
     display: flex;
-    margin: 0 auto;
+    margin: 0 auto -1px;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #ddd;
+    border: 1px solid ${(props) => props.theme.cardBgColor};
     padding: 15px 20px;
+    dd {
+      color: ${(props) => props.theme.accentColor};
+    }
   }
 `;
 
